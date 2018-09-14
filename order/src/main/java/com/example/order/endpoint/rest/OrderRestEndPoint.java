@@ -43,18 +43,18 @@ public class OrderRestEndPoint {
 		return ResponseEntity.ok(msg);
 	}
 	
-	@GetMapping("/{busName}/inventory/{id}")
-	public ResponseEntity getById(@PathVariable("busName") String busName, @PathVariable("id") Long id) throws IOException {
+	@GetMapping("/{busName}/{locnNbr}/order/{id}")
+	public ResponseEntity getById(@PathVariable("busName") String busName, @PathVariable("locnNbr") Integer locnNbr, @PathVariable("id") Long id) throws IOException {
 		try {
-			return ResponseEntity.ok(orderService.findById(busName, id));
+			return ResponseEntity.ok(orderService.findById(busName, locnNbr, id));
 		} catch (Exception e) {
 			log.error("Error Occured for busName:" + busName + ", id:" + id + " : " + e.getMessage());
 			return ResponseEntity.badRequest().body(new ErrorRestResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Error Occured for GET request busName:" + busName + ", id:" + id + " : " + e.getMessage()));
 		}
 	}
 
-	@PostMapping("/{busName}/order/{id}")
-	public ResponseEntity updateOrder(@PathVariable("busName") String busName, @RequestBody OrderUpdateRequestDTO orderUpdateReq) throws IOException {
+	@PostMapping("/{busName}/{locnNbr}/order/{id}")
+	public ResponseEntity updateOrder(@PathVariable("busName") String busName, @PathVariable("locnNbr") Integer locnNbr, @RequestBody OrderUpdateRequestDTO orderUpdateReq) throws IOException {
 		try {
 			return ResponseEntity.ok(orderService.updateOrder(orderUpdateReq));
 		} catch (Exception e) {
@@ -63,8 +63,8 @@ public class OrderRestEndPoint {
 		}
 	}	
 
-	@PutMapping("/{busName}/order")
-	public ResponseEntity createOrder(@PathVariable("busName") String busName, @RequestBody OrderCreationRequestDTO orderCreationReq) throws IOException {
+	@PutMapping("/{busName}/{locnNbr}/order")
+	public ResponseEntity createOrder(@PathVariable("busName") String busName, @PathVariable("locnNbr") Integer locnNbr, @RequestBody OrderCreationRequestDTO orderCreationReq) throws IOException {
 		long startTime = System.currentTimeMillis();
 		log.info("Received Order Create request for : " + orderCreationReq.toString() + ": at :" + new java.util.Date());
 		ResponseEntity resEntity = null;

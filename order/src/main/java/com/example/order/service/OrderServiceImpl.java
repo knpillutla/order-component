@@ -14,7 +14,6 @@ import com.example.order.dto.events.OrderCreatedEvent;
 import com.example.order.dto.events.OrderCreationFailedEvent;
 import com.example.order.dto.events.OrderUpdateFailedEvent;
 import com.example.order.dto.requests.OrderCreationRequestDTO;
-import com.example.order.dto.requests.OrderDeleteRequestDTO;
 import com.example.order.dto.requests.OrderUpdateRequestDTO;
 import com.example.order.dto.responses.OrderDTO;
 
@@ -94,14 +93,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public OrderDTO findById(String busName, Long Id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public OrderDTO purgeOrder(OrderDeleteRequestDTO orderDelRequest) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public OrderDTO findById(String busName, Integer locnNbr, Long id) throws Exception {
+		Order orderEntity = orderDAO.findById(busName, locnNbr, id);
+		return orderDTOConverter.getOrderDTO(orderEntity);
 	}
 }

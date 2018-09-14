@@ -1,8 +1,6 @@
 package com.example.order.dto.events;
 
 import com.example.order.dto.requests.OrderCreationRequestDTO;
-import com.example.order.dto.requests.OrderAllocationRequestDTO;
-import com.example.order.dto.responses.OrderDTO;
 
 import lombok.Data;
 

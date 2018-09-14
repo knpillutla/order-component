@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class OrderCreationRequestDTO {
+public class OrderCreationRequestDTO extends BaseRequestDTO{
 	String busName;
 	Integer locnNbr;
 	String company;
