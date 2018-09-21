@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-import com.example.order.service.OrderStreams;
+import com.example.order.streams.OrderStreams;
 
 import lombok.extern.slf4j.Slf4j;
 

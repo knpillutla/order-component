@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.example.order.dto.requests.OrderCreationRequestDTO;
 import com.example.order.service.OrderService;
-import com.example.order.service.OrderStreams;
+import com.example.order.streams.OrderStreams;
 
 import lombok.extern.slf4j.Slf4j;
 

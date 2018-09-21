@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.order.db.Order;
+import com.example.order.db.OrderLine;
+import com.example.order.db.OrderLineRepository;
 import com.example.order.db.OrderRepository;
 import com.example.order.dto.converter.OrderDTOConverter;
 import com.example.order.dto.events.OrderCreatedEvent;
@@ -24,6 +26,9 @@ import lombok.extern.slf4j.Slf4j;
 public class OrderServiceImpl implements OrderService {
 	@Autowired
 	OrderRepository orderDAO;
+
+	@Autowired
+	OrderLineRepository orderLineDAO;
 
 	@Autowired
 	EventPublisher eventPublisher;
@@ -81,7 +86,11 @@ public class OrderServiceImpl implements OrderService {
 			order.setUpdatedDttm(orderCreationDate);
 			order.setStatCode(OrderStatus.READY.getStatCode());
 			Order savedOrderObj = orderDAO.save(order);
-			orderResponseDTO = orderDTOConverter.getOrderDTO(savedOrderObj);
+/*			for(OrderLine orderLine : order.getOrderLines()) {
+				orderLine.setOrder(savedOrderObj);
+			}
+			orderLineDAO.saveAll(order.getOrderLines());
+*/			orderResponseDTO = orderDTOConverter.getOrderDTO(savedOrderObj);
 			eventPublisher.publish(new OrderCreatedEvent(orderResponseDTO));
 		} catch (Exception ex) {
 			log.error("Created Order Error:" + ex.getMessage(), ex);

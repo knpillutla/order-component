@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.order.dto.requests.OrderCreationRequestDTO;
 import com.example.order.service.EventPublisher;
-import com.example.order.service.OrderStreams;
+import com.example.order.streams.OrderStreams;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -46,7 +46,7 @@ public class OrderListenerTest {
 		assertEquals(OrderStatus.REJECTED, received.getPayload().getStatus());
 	}*/
 
-	public OrderCreationRequestDTO createNewOrder() {
+/*	public OrderCreationRequestDTO createNewOrder() {
 		Date currentDate = new java.util.Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(currentDate);
@@ -60,5 +60,5 @@ public class OrderListenerTest {
 				"FIR0" +orderNbr , currentDate, shipDttm, expectedDeliveryDttm, "Express", false, "", "TestService",
 				"TestCreateOrder", "", "", "Krishna");
 		return orderCreationReq;
-	}
+	}*/
 }

@@ -12,9 +12,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import lombok.Data;
 
@@ -27,9 +31,8 @@ public class Order  implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "ORDER_ID")
-	private List<OrderLine> orderLines = new ArrayList<>();
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	List<OrderLine> orderLines = new ArrayList<>();
 	
 	@Column(name="BUS_NAME")
 	String busName;
@@ -91,16 +94,20 @@ public class Order  implements Serializable{
 	@Column(name="HOST_NAME")
 	String hostName;
 
-	@Column(name="CREATED_DTTM")
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+	@Column(name="CREATED_DTTM", nullable = false, updatable = false)
 	Date createdDttm;
 	
-	@Column(name="UPDATED_DTTM")
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "UPDATED_DTTM", nullable = false)
+    @LastModifiedDate
 	Date updatedDttm;
 	
 	@Column(name="CREATED_BY")
 	String createdBy;
 
-	@Column(name="UPDATED_BY")
+ 	@Column(name="UPDATED_BY")
 	String updatedBy;
 
     public void addOrderLine(OrderLine orderLine) {

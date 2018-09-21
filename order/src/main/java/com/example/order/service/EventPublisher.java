@@ -2,7 +2,6 @@ package com.example.order.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
@@ -10,7 +9,8 @@ import org.springframework.messaging.support.MessageHeaderAccessor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MimeTypeUtils;
 
-import com.example.order.dto.events.Event;
+import com.example.order.dto.events.BaseEvent;
+import com.example.order.streams.OrderStreams;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,7 +25,7 @@ public class EventPublisher {
 	        this.orderStreams = orderStreams;
 	    }
 
-	public void publish(Event event) {
+	public void publish(BaseEvent event) {
 		log.info("Sending event {}", event);
 		MessageChannel messageChannel = orderStreams.outboundOrders();
 		MessageHeaderAccessor msgHdrAccessor = new MessageHeaderAccessor();

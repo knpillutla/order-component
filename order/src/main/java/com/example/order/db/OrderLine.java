@@ -3,12 +3,21 @@ package com.example.order.db;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import lombok.Data;
 
@@ -21,16 +30,12 @@ public class OrderLine  implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 
-/*
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ORDER_ID")
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name="ORDER_ID", nullable=false)
     private Order order;
-*/	
+
 	@Column(name="LOCN_NBR")
 	Integer locnNbr;
-
-	@Column(name="ORDER_ID")
-	Integer orderId;
 
 	@Column(name="ITEM_BRCD")
 	String itemBrcd;
@@ -77,10 +82,14 @@ public class OrderLine  implements Serializable{
 	@Column(name="HOST_NAME")
 	String hostName;
 
-	@Column(name="CREATED_DTTM")
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+	@Column(name="CREATED_DTTM", nullable = false, updatable = false)
 	Date createdDttm;
 	
-	@Column(name="UPDATED_DTTM")
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "UPDATED_DTTM", nullable = false)
+    @LastModifiedDate
 	Date updatedDttm;
 	
 	@Column(name="CREATED_BY")
@@ -89,28 +98,20 @@ public class OrderLine  implements Serializable{
 	@Column(name="UPDATED_BY")
 	String updatedBy;
 
-	public OrderLine(Long id, Integer locnNbr, Integer orderId, String itemBrcd, Integer origOrderQty,
-			Integer orderQty, Integer cancelledQty, Integer shortQty, Integer pickedQty, Integer packedQty,
-			Integer shippedQty, Integer statCode, String olpn, String source, String transactionName,
-			String refField1, String refField2, Date updatedDttm, String updatedBy) {
-		this.id = id;
+	public OrderLine(Integer locnNbr, String itemBrcd, Integer origOrderQty,
+			Integer orderQty, String source, String transactionName,
+			String refField1, String refField2, String userId) {
 		this.locnNbr = locnNbr;
-		this.orderId = orderId;
 		this.itemBrcd = itemBrcd;
 		this.origOrderQty = origOrderQty;
 		this.orderQty = orderQty;
-		this.cancelledQty = cancelledQty;
-		this.shortQty = shortQty;
-		this.pickedQty = pickedQty;
-		this.packedQty = packedQty;
-		this.shippedQty = shippedQty;
-		this.statCode = statCode;
-		this.olpn = olpn;
 		this.source = source;
 		this.transactionName = transactionName;
 		this.refField1 = refField1;
 		this.refField2 = refField2;
-		this.updatedDttm = updatedDttm;
-		this.updatedBy = updatedBy;
+		this.createdDttm = new java.util.Date();
+		this.updatedDttm = new java.util.Date();
+		this.createdBy = userId;
+		this.updatedBy = userId;
 	}
 }

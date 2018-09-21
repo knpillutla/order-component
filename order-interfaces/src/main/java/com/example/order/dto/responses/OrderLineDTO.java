@@ -3,13 +3,28 @@ package com.example.order.dto.responses;
 import java.io.Serializable;
 import java.util.Date;
 
-import lombok.Data;
+import com.example.inventory.dto.BaseDTO;
+import com.example.order.dto.events.ExceptionEvent;
+import com.example.order.dto.requests.OrderLineCreationRequestDTO;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Value;
+
+@JsonAutoDetect(fieldVisibility = Visibility.ANY)
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+@NoArgsConstructor
 @Data
-public class OrderLineDTO  implements Serializable{
+@AllArgsConstructor
+public class OrderLineDTO  extends BaseDTO implements Serializable{
 	Long id;
 	Integer locnNbr;
-	Integer orderId;
+	Long orderId;
 	String itemBrcd;
 	Integer origOrderQty;
 	Integer orderQty;
@@ -26,30 +41,4 @@ public class OrderLineDTO  implements Serializable{
 	String refField2;
 	Date updatedDttm;
 	String updatedBy;
-
-	public OrderLineDTO(Long id, Integer locnNbr, Integer orderId, String itemBrcd, Integer origOrderQty,
-			Integer orderQty, Integer cancelledQty, Integer shortQty, Integer pickedQty, Integer packedQty,
-			Integer shippedQty, Integer statCode, String olpn, String source, String transactionName, String refField1,
-			String refField2, Date updatedDttm, String updatedBy) {
-		super();
-		this.id = id;
-		this.locnNbr = locnNbr;
-		this.orderId = orderId;
-		this.itemBrcd = itemBrcd;
-		this.origOrderQty = origOrderQty;
-		this.orderQty = orderQty;
-		this.cancelledQty = cancelledQty;
-		this.shortQty = shortQty;
-		this.pickedQty = pickedQty;
-		this.packedQty = packedQty;
-		this.shippedQty = shippedQty;
-		this.statCode = statCode;
-		this.olpn = olpn;
-		this.source = source;
-		this.transactionName = transactionName;
-		this.refField1 = refField1;
-		this.refField2 = refField2;
-		this.updatedDttm = updatedDttm;
-		this.updatedBy = updatedBy;
-	}
 }
