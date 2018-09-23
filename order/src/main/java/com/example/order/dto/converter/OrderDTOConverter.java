@@ -12,6 +12,8 @@ import com.example.order.dto.requests.OrderLineCreationRequestDTO;
 import com.example.order.dto.requests.OrderUpdateRequestDTO;
 import com.example.order.dto.responses.OrderDTO;
 import com.example.order.dto.responses.OrderLineDTO;
+import com.example.order.service.OrderServiceImpl.OrderLineStatus;
+import com.example.order.service.OrderServiceImpl.OrderStatus;
 
 @Component
 public class OrderDTOConverter {
@@ -42,9 +44,11 @@ public class OrderDTOConverter {
 		List<OrderLine> orderLineList = new ArrayList();
 		for (OrderLineCreationRequestDTO orderLineCreationRequestDTO : orderCreationRequestDTO.getOrderLines()) {
 			OrderLine orderLineEntity = getOrderLineEntity(orderLineCreationRequestDTO, orderCreationRequestDTO);
+			orderLineEntity.setStatCode(OrderLineStatus.READY.getStatCode());
 			orderEntity.addOrderLine(orderLineEntity);
 			orderLineEntity.setOrder(orderEntity);
 		}
+		orderEntity.setStatCode(OrderStatus.READY.getStatCode());
 		return orderEntity;
 	}
 

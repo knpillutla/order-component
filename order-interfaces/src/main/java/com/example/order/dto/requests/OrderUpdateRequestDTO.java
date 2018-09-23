@@ -28,6 +28,7 @@ public class OrderUpdateRequestDTO extends BaseDTO{
 	String orderNbr;
 	String company;
 	String division;
+	String busUnit;
 	Date orderDttm;
 	Date shipByDttm;
 	Date expectedDeliveryDttm;

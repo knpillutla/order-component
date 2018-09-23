@@ -28,10 +28,10 @@ public class OrderCreatedEvent extends BaseEvent {
 		this.orderDTO = orderDTO;
 		if(headerMap != null)
 			this.setHeaderMap(headerMap);
-		this.addHeader("eventName", eventName);
-		this.addHeader("OrderNbr", orderDTO.getOrderNbr());
+		this.addHeader("eventName", getEventName());
 		this.addHeader("busName", orderDTO.getBusName());
 		this.addHeader("locnNbr", orderDTO.getLocnNbr());
+		this.addHeader("OrderNbr", orderDTO.getOrderNbr());
 		this.addHeader("company", orderDTO.getCompany());
 		this.addHeader("division", orderDTO.getDivision());
 		this.addHeader("busUnit", orderDTO.getBusUnit());

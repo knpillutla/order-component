@@ -38,5 +38,9 @@ public class OrderCreationRequestDTO extends BaseDTO{
 	String refField2;
 	String userId;
 	List<OrderLineCreationRequestDTO> orderLines;
+	
+	public void createHeaders() {
+		this.addHeader("eventName", "NewOrderEvent");
+	}
 }
 

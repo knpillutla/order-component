@@ -18,5 +18,8 @@ public interface OrderRepository extends JpaRepository<Order, Long>{
 	public List<Order> findByUniqueKey(@Param("busName") Integer busName, @Param("locnNbr") Integer locnNbr, @Param("company") String company, @Param("division") String division, @Param("busUnit") String busUnit);
 	
 	@Query("select o from Order o where o.busName=:busName and o.locnNbr=:locnNbr and o.orderNbr=:orderNbr")
+	public Order findByBusNameAndLocnNbrAndOrderNbr(@Param("busName") String busName, @Param("locnNbr") Integer locnNbr, @Param("orderNbr") String orderNbr);
+	
+	@Query("select o from Order o where o.busName=:busName and o.locnNbr=:locnNbr and o.orderNbr=:orderNbr")
 	public List<Order> findByUniqueKey(@Param("busName") Integer busName, @Param("locnNbr") Integer locnNbr, @Param("orderNbr") String orderNbr);
 }

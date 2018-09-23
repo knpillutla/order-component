@@ -16,9 +16,16 @@ public class OrderCreationFailedEvent extends ExceptionEvent{
 	public OrderCreationRequestDTO orderCreationReq;
 	private static String EVENT_NAME = "OrderUpdateFailedEvent";
 	
-	public OrderCreationFailedEvent(OrderCreationRequestDTO pickReq, String errorMsg) {
+	public OrderCreationFailedEvent(OrderCreationRequestDTO req, String errorMsg) {
 		super(EVENT_NAME, errorMsg);
-		this.orderCreationReq = pickReq;
+		this.orderCreationReq = req;
+		this.addHeader("eventName", getEventName());
+		this.addHeader("busName", req.getBusName());
+		this.addHeader("locnNbr", req.getLocnNbr());
+		this.addHeader("OrderNbr", req.getOrderNbr());
+		this.addHeader("company", req.getCompany());
+		this.addHeader("division", req.getDivision());
+		this.addHeader("busUnit", req.getBusUnit());
 	}
 
 }
