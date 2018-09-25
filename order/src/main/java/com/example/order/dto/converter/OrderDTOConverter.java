@@ -69,7 +69,7 @@ public class OrderDTOConverter {
 
 	public OrderLineDTO getOrderLineDTO(OrderLine orderLine) {
 		OrderLineDTO orderLineDTO = new OrderLineDTO(orderLine.getId(), orderLine.getLocnNbr(), orderLine.getOrder().getId(),
-				orderLine.getItemBrcd(), orderLine.getOrigOrderQty(), orderLine.getOrderQty(),
+				orderLine.getOrderLineNbr(), orderLine.getItemBrcd(), orderLine.getOrigOrderQty(), orderLine.getOrderQty(),
 				orderLine.getCancelledQty(), orderLine.getShortQty(), orderLine.getPickedQty(),
 				orderLine.getPackedQty(), orderLine.getShippedQty(), orderLine.getStatCode(), orderLine.getOlpn(),
 				orderLine.getSource(), orderLine.getTransactionName(), orderLine.getRefField1(),
@@ -78,7 +78,7 @@ public class OrderDTOConverter {
 	}
 
 	public OrderLine getOrderLineEntity(OrderLineCreationRequestDTO orderLineCreationRequestDTO,  OrderCreationRequestDTO orderCreationRequestDTO) {
-		OrderLine orderLine = new OrderLine(orderCreationRequestDTO.getLocnNbr(), orderLineCreationRequestDTO.getItemBrcd(),
+		OrderLine orderLine = new OrderLine(orderCreationRequestDTO.getLocnNbr(), orderLineCreationRequestDTO.getOrderLineNbr(), orderLineCreationRequestDTO.getItemBrcd(),
 				orderLineCreationRequestDTO.getOrigOrderQty(), orderLineCreationRequestDTO.getOrderQty(), orderCreationRequestDTO.getSource(),
 				orderCreationRequestDTO.getTransactionName(), orderLineCreationRequestDTO.getRefField1(), orderLineCreationRequestDTO.getRefField2(),
 				orderCreationRequestDTO.getUserId());

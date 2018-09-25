@@ -63,6 +63,7 @@ CREATE TABLE ORDER_LINES
     ID serial primary key,
 	LOCN_NBR integer not null,
     ORDER_ID integer not null REFERENCES ORDERS (ID),
+    LINE_NBR integer not null,
     ITEM_BRCD character varying(25) NULL,
     ORIG_ORDER_QTY integer NOT NULL DEFAULT 0,
     ORDER_QTY integer NOT NULL DEFAULT 0,

@@ -25,6 +25,7 @@ public class OrderLineDTO  extends BaseDTO implements Serializable{
 	Long id;
 	Integer locnNbr;
 	Long orderId;
+	Integer orderLineNbr;
 	String itemBrcd;
 	Integer origOrderQty;
 	Integer orderQty;

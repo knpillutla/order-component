@@ -34,6 +34,9 @@ public class OrderLine  implements Serializable{
 	@JoinColumn(name="ORDER_ID", nullable=false)
     private Order order;
 
+	@Column(name="LINE_NBR")
+	Integer orderLineNbr;
+
 	@Column(name="LOCN_NBR")
 	Integer locnNbr;
 
@@ -98,10 +101,11 @@ public class OrderLine  implements Serializable{
 	@Column(name="UPDATED_BY")
 	String updatedBy;
 
-	public OrderLine(Integer locnNbr, String itemBrcd, Integer origOrderQty,
+	public OrderLine(Integer locnNbr, Integer orderLineNbr, String itemBrcd, Integer origOrderQty,
 			Integer orderQty, String source, String transactionName,
 			String refField1, String refField2, String userId) {
 		this.locnNbr = locnNbr;
+		this.orderLineNbr = orderLineNbr;
 		this.itemBrcd = itemBrcd;
 		this.origOrderQty = origOrderQty;
 		this.orderQty = orderQty;
